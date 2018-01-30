@@ -1,0 +1,42 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.github.pabloo99.entity.Employee" table="EMPLOYEES">
+
+        <meta attribute="class-description">
+            This class contains the employee detail.
+        </meta>
+
+        <id name="employeeId" type="int" column="employee_id">
+            <generator class="assigned"/>
+        </id>
+
+        <property name="firstName" column="first_name" type="string"/>
+        <property name="lastName" column="last_name" type="string"/>
+        <property name="email" column="email" type="string"/>
+        <property name="phoneNumber" column="phone_number" type="string"/>
+        <property name="hireDate" column="hire_date" type="date"/>
+        <property name="jobId" column="job_id" type="string"/>
+        <property name="salary" column="salary" type="double"/>
+        <property name="commissionPct" column="commission_pct" type="double"/>
+        <property name="managerId" column="manager_id" type="int"/>
+        <property name="departmentId" column="department_id" type="int"/>
+
+
+        <!--private int employeeId;
+        private String firstName;
+        private String lastName;
+        private String email;
+        private String phoneNumber;
+        private Date hireDate;
+        private String jobId;
+        private double salary;
+        private double commissionPct;
+        private int managerId;
+        private int departmentId;-->
+
+    </class>
+</hibernate-mapping>
