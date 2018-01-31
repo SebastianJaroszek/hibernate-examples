@@ -30,6 +30,10 @@
         <mapping resource = "Employee.hbm.xml"/>
         <mapping resource = "Department.hbm.xml"/>
         <mapping class="com.github.pabloo99.entity.Country"/>
+        <mapping class="com.github.pabloo99.entity.JobHistory"/>
+        <mapping class="com.github.pabloo99.entity.Job"/>
+        <mapping class="com.github.pabloo99.entity.Location"/>
+        <mapping class="com.github.pabloo99.entity.Region"/>
 
     </session-factory>
 </hibernate-configuration>
