@@ -1,6 +1,8 @@
 package com.github.pabloo99.dao;
 
 import com.github.pabloo99.connection.HibernateUtil;
+import com.github.pabloo99.dto.EmployeeDto;
+import com.github.pabloo99.dto.EmployeeGroupedByJobDto;
 import com.github.pabloo99.entity.Employee;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -10,6 +12,7 @@ import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EmployeeDao {
 
@@ -110,6 +113,38 @@ public class EmployeeDao {
         } finally {
             session.close();
         }
+    }
+
+    public List<EmployeeGroupedByJobDto> countByJob(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+
+        List<EmployeeGroupedByJobDto> result = new ArrayList<>();
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("SELECT COUNT(*) AS empCountr, MAX(emp.jobId) AS jobTitle " +
+                    "FROM Employee AS emp GROUP BY emp.jobId");
+
+            List<?> items = query.getResultList();
+
+            transaction.commit();
+
+            return items.stream()
+                    .map(o -> {
+                        Object[] attributes = (Object[])o;
+                        Long count = (Long) attributes[0];
+                        return new EmployeeGroupedByJobDto(count.intValue(), (String)attributes[1]);
+                    })
+                    .collect(Collectors.toList());
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            logger.error(e.getMessage(), e);
+        } finally {
+            session.close();
+        }
+        return result;
     }
 
 }

@@ -10,7 +10,7 @@
             This class contains the department detail.
         </meta>
 
-        <id name="departmentId" type="int" column="deparment_id">
+        <id name="departmentId" type="int" column="department_id">
             <generator class="assigned"/>
         </id>
 
