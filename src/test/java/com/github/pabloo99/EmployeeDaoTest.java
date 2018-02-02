@@ -75,4 +75,13 @@ public class EmployeeDaoTest {
         assertTrue(result.size() > 0);
     }
 
+    @Test
+    public void shouldReturnEmployeesWhoMakeALotOfMoney(){
+        List<Employee> result = employeeDao.findWithNiceSalary();
+
+        result.forEach(employee -> log.info(employee.getSalary()));
+
+        assertTrue(result.size() > 0);
+    }
+
 }

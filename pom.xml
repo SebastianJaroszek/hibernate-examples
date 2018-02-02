@@ -54,6 +54,12 @@
       <version>6.13.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.196</version>
+      <scope>test</scope>
+    </dependency>
     <!-- Hibernate c3p0 connection pool -->
     <dependency>
       <groupId>org.hibernate</groupId>

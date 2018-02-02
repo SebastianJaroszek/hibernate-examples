@@ -147,4 +147,27 @@ public class EmployeeDao {
         return result;
     }
 
+    public List<Employee> findWithNiceSalary(){
+        //SELECT * FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        List<Employee> result = new ArrayList<>();
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Employee " +
+                    "WHERE salary > (SELECT AVG(salary) FROM Employee)");
+            result = query.getResultList();
+            transaction.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            logger.error(e.getMessage(), e);
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+
 }
